@@ -1,0 +1,26 @@
+package gapp.model.dao.jpa;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
+
+import gapp.model.DepartmentMajor;
+import gapp.model.dao.DepartmentMajorDao;
+
+@Repository
+public class DepartmentMajorDaoImpl implements DepartmentMajorDao {
+	
+	 @PersistenceContext
+	    private EntityManager entityManager;
+	 
+	 @Override
+		public List<DepartmentMajor> getMajor(String name) {
+			return entityManager.createQuery( "from EducationMajor where deparment.departmentName= :name", DepartmentMajor.class )
+	    			.setParameter( "name", name )
+	    			.getResultList();
+		}
+
+}

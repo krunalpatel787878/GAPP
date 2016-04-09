@@ -1,0 +1,76 @@
+package gapp.model;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.print.attribute.standard.DateTimeAtCompleted;
+
+@Entity
+@Table(name = "application_records")
+public class AppicatioRecord implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    @Column(name="application_record_id")
+    private Integer id;
+    
+    @ManyToOne
+    private Application application;
+    
+    @ManyToOne
+    private ApplicationStatus status;
+    
+    private Date date;
+    
+    private String comment;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
+	}
+
+	public ApplicationStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ApplicationStatus status) {
+		this.status = status;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+    
+    
+}

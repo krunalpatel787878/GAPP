@@ -1,0 +1,65 @@
+package gapp.model;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "department_majors")
+public class DepartmentMajor implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    @Column(name="major_id")
+    private Integer id;
+    
+    @Column(name="major_name")
+    private String majorName;
+    
+    @ManyToOne
+    private Department department;
+    
+private boolean isValid;
+    
+    
+    public boolean isValid() {
+		return isValid;
+	}
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getMajorName() {
+		return majorName;
+	}
+
+	public void setMajorName(String majorName) {
+		this.majorName = majorName;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+    
+    
+}

@@ -1,0 +1,206 @@
+
+    create sequence hibernate_sequence minvalue 100;
+
+    
+    
+     create table additional_info (
+        info_id int4 not null,
+        isValid boolean not null,
+        name varchar(255),
+        required boolean not null,
+        type varchar(255),
+        department_department_id int4,
+        primary key (info_id)
+    );
+
+    create table additional_record (
+        record_id int4 not null,
+        isValid boolean not null,
+        value varchar(255),
+        info_info_id int4,
+        student_student_id int4,
+        primary key (record_id)
+    );
+
+    create table application_records (
+        application_record_id int4 not null,
+        comment varchar(255),
+        date timestamp,
+        isValid boolean not null,
+        application_application_id int4,
+        status_status_id int4,
+        primary key (application_record_id)
+    );
+
+    create table application_status (
+        status_id int4 not null,
+        status_info varchar(255),
+        isValid boolean not null,
+        status varchar(255),
+        primary key (status_id)
+    );
+
+    create table applications (
+        application_id int4 not null,
+        isValid boolean not null,
+        term varchar(255),
+        program_major_id int4,
+        status_status_id int4,
+        student_student_id int4,
+        primary key (application_id)
+    );
+
+    create table department_majors (
+        major_id int4 not null,
+        isValid boolean not null,
+        major_name varchar(255),
+        department_department_id int4,
+        primary key (major_id)
+    );
+
+    create table departments (
+        department_id int4 not null,
+        department_name varchar(255),
+        isValid boolean not null,
+        primary key (department_id)
+    );
+
+    create table education_info (
+        education_id int4 not null,
+        college_name varchar(255),
+        degree_earned varchar(255),
+        duration varchar(255),
+        isValid boolean not null,
+        major varchar(255),
+        student_student_id int4,
+        primary key (education_id)
+    );
+
+    create table students (
+        student_id int4 not null,
+        cin varchar(255),
+        date_of_birth timestamp,
+        gpa float8,
+        toefl int4,
+        citizenship varchar(255),
+        email varchar(255),
+        first_name varchar(255),
+        gender varchar(255),
+        isValid boolean not null,
+        last_name varchar(255),
+        phone varchar(255),
+        transcript varchar(255),
+        user_user_id int4,
+        primary key (student_id)
+    );
+
+    create table users (
+        user_id int4 not null,
+        email varchar(255),
+        first_name varchar(255),
+        isValid boolean not null,
+        last_name varchar(255),
+        password varchar(255),
+        user_type varchar(255),
+        primary key (user_id)
+    );
+
+    alter table additional_info 
+        add constraint FK_iko938hkakyusbnxvvpgb573t 
+        foreign key (department_department_id) 
+        references departments;
+
+    alter table additional_record 
+        add constraint FK_c6j9dv6grn10eyy01kxwunlva 
+        foreign key (info_info_id) 
+        references additional_info;
+
+    alter table additional_record 
+        add constraint FK_termui1bv9vhulrsntu41h6jo 
+        foreign key (student_student_id) 
+        references students;
+
+    alter table application_records 
+        add constraint FK_mtdfavrm9ncrw9gmxdtqk6ddg 
+        foreign key (application_application_id) 
+        references applications;
+
+    alter table application_records 
+        add constraint FK_1lonxkgpgdripjgmb061ulg85 
+        foreign key (status_status_id) 
+        references application_status;
+
+    alter table applications 
+        add constraint FK_paq12o1qndons27cxnptxq5xo 
+        foreign key (program_major_id) 
+        references department_majors;
+
+    alter table applications 
+        add constraint FK_kcvgm8wkufnd1xp5xd4bxkqof 
+        foreign key (status_status_id) 
+        references application_status;
+
+    alter table applications 
+        add constraint FK_2rk16crqegf62ptycwvr10a66 
+        foreign key (student_student_id) 
+        references students;
+
+    alter table department_majors 
+        add constraint FK_g5v3k1nmrqkernfnj3ckdeflk 
+        foreign key (department_department_id) 
+        references departments;
+
+    alter table education_info 
+        add constraint FK_pqibyb11al1enn5ej5ranwcb5 
+        foreign key (student_student_id) 
+        references students;
+
+    alter table students 
+        add constraint FK_mxpwo4l2kfhpduw0qdfj6s0e5 
+        foreign key (user_user_id) 
+        references users;
+
+/* Insert Users*/
+insert into users(user_id,email,first_name,last_name,password,user_type,isValid) values(1,'admin@localhost.localdomain','krunal','patel','abcd','Admin','true');
+insert into users(user_id,email,first_name,last_name,password,user_type,isValid) values(2,'staff1@localhost.localdomain','john','doe','staff1','Staff','true');
+insert into users(user_id,email,first_name,last_name,password,user_type,isValid) values(3,'staff2@localhost.localdomain','steve','patel','staff2','Staff','true');
+insert into users(user_id,email,first_name,last_name,password,user_type,isValid) values(4,'student1@localhost.localdomain','krunal','patel','student1','Student','true');
+insert into users(user_id,email,first_name,last_name,password,user_type,isValid) values(5,'student2@localhost.localdomain','amar','shah','student2','Student','true');
+
+/* Insert Department*/
+insert into departments(department_id,department_name,isValid) values(1,'Accounting',true);
+insert into departments(department_id,department_name,isValid) values(2,'Computer Science','true');
+
+/*Insert Major*/
+insert into department_majors(major_id,major_name,department_department_id,isValid) values(1,'MS in Accounting',1,'true');
+insert into department_majors(major_id,major_name,department_department_id,isValid) values(2,'MS in Computer Science',2,'true');
+
+/* Inserting gmat*/
+insert into additional_info(info_id,name,required,type,department_department_id,isValid) values(1,'gmat',true,'number',1,'true');
+
+/*Inserting Status*/
+insert into application_status(status_id,status_info,status,isValid) values(1,' the application is submitted by the student','New','true');
+insert into application_status(status_id,status_info,status,isValid) values(2,'after all the application materials have been received and the application fees paid, a staff can change the status from New to Pending Review to indicate that the application is ready to be reviewed','Pending Review','true');
+insert into application_status(status_id,status_info,status,isValid) values(3,'the application is denied','Denied','true');
+insert into application_status(status_id,status_info,status,isValid) values(4,'the department recommends the admission of the student','Recommend Admit','true');
+insert into application_status(status_id,status_info,status,isValid) values(5,'the department recommends the admission of the students but with some conditions','Recommend Admit w/ Condition','true');
+
+/* Inserting Student*/
+
+insert into students(student_id,cin ,date_of_birth,gpa ,toefl ,citizenship ,email,first_name ,gender,last_name,phone ,transcript,user_user_id,isValid) values(1,'123456','08-01-1993',3.8,88,'India','student1@localhost.localdomain','krunal','Male','patel','123456789','xyz.pdf',4,'true');
+
+/* Application */
+
+insert into applications(application_id,term,program_major_id,status_status_id,student_student_id,isValid) values(1,'Fall 2016',1,1,1,'true');
+
+/* Application status record */
+
+insert into application_records(application_record_id,comment,date,application_application_id,status_status_id,isValid) values(1,'Fresh Applicatiom',CURRENT_TIMESTAMP,1,1,'true');
+
+/* Insert Education info */
+
+insert into education_info(education_id,college_name,degree_earned,duration,major,student_student_id,isValid) values(1,'SVIT','BE','4 year','Computer Engineering',1,'true');
+
+/* additional info(Gmat score) */
+
+insert into additional_record(record_id,value,info_info_id,student_student_id,isValid) values(1,'300',1,1,'true');
